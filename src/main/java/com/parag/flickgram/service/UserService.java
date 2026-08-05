@@ -13,15 +13,15 @@ import java.util.Optional;
 @Service
 public class UserService {
     @Autowired
-    private UserRepository userepository;
+    private UserRepository userRepository;
 
 //    ---------Getting users--------------
     public List<User> getAllUsers(){
-        return userepository.findAll();
+        return userRepository.findAll();
     }
 
     public Optional<User> getUser(Integer id){
-        return userepository.findById(id);
+        return userRepository.findById(id);
 
     }
 //     ------------create user---------
@@ -32,7 +32,7 @@ public class UserService {
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
 
-        User savedUser = userepository.save(user);
+        User savedUser = userRepository.save(user);
 
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setId(savedUser.getId());
@@ -44,7 +44,7 @@ public class UserService {
 //  --------------update user-----------
 
     public User updateUser(int id, User user){
-        Optional<User> optionalUser = userepository.findById(id);
+        Optional<User> optionalUser = userRepository.findById(id);
 
         if(optionalUser.isPresent()){
             User existingUser = optionalUser.get();
@@ -52,16 +52,16 @@ public class UserService {
             existingUser.setName(user.getName());
             existingUser.setEmail(user.getEmail());
 
-            return userepository.save(user);
+            return userRepository.save(user);
         }
         return null;
     }
 
     public boolean deleteUser(Integer id){
-        Optional<User> optionalUser = userepository.findById(id);
+        Optional<User> optionalUser = userRepository.findById(id);
 
         if(optionalUser.isPresent()){
-            userepository.deleteById(id);
+            userRepository.deleteById(id);
             return true;
         }
         return false;
