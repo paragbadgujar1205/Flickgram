@@ -5,6 +5,7 @@ import com.parag.flickgram.dto.UserResponseDTO;
 import com.parag.flickgram.service.UserService;
 import com.parag.flickgram.model.User;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponseDTO postUser(@RequestBody UserRequestDTO dto){
+    public UserResponseDTO postUser(@Valid @RequestBody UserRequestDTO dto){
         return userservice.saveUser(dto);
     }
 
